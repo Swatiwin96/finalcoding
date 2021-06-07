@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    </head>
+    <body>
+    <div class="main" ng-app="subjectList" ng-controller="myCtrl">
+    <h1>TODO LIST</h1>
+    <div class="search">
+    <input type="text" placeholder="ADD TODO" ng-model="addMe">
+    <span ng-click="addItem()"><i class="fas fa-plus"></i></span>
+    <ul>
+    <li ng-repeat="x in subject">{{x}}<i ng-click="removeItem($index)" class="fas fa-trash-alt"></i></li>
+    </ul>
+    <p>{{errortext}}</p>
+    </div>
+    <script type="text/javascript">
+    var app=angular.module("subjectList",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.subject=["angular","react","nodejs"];
+        $scope.addItem=function(){
+            $scope.errortext="";
+            if(!$scope.addMe){return;}
+            if($scope.subject.indexOf($scope.addMe)==-1){
+                $scope.subject.push($scope.addMe);
+            }
+            else{
+                $scope.errortext="This item is already in todo list";
+            }
+        }
+            $scope.removeItem=function(x){
+                $scope.subject.splice(x,1);}});
+                </script>
